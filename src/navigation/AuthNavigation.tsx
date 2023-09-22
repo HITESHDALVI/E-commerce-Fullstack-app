@@ -13,6 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../assets/styles/colors';
+import ProductDetail from '../screen/product/ProductDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,6 +99,11 @@ const AuthNavigation = () => {
         <Stack.Screen
           name="main"
           component={BottomTabs}
+          options={headerOptions}
+        />
+        <Stack.Screen
+          name="product-detail"
+          component={ProductDetail}
           options={headerOptions}
         />
       </Stack.Navigator>

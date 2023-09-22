@@ -1,41 +1,119 @@
 import {
+  Image,
   Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {colors} from '../../assets/styles/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {deals} from '../../utilis/dummy_data/data';
+import {getProducts} from '../../utilis/api/api';
+import ProductItem from '../../common/ProductItem';
+import {style} from '../../assets/styles/commonStyles';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Search from '../../common/Search';
+import Location from '../../common/Location';
+import Category from '../../common/Category';
+import Banner from '../../common/Banner';
+import SectionTitle from '../../common/SectionTitle';
+import SectionBreaker from '../../common/SectionBreaker';
+import Offers from '../../common/Offers';
+
+type ItemProps = {title: string};
+
+const Item = ({title}: ItemProps) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState('jewelery');
+  const [items, setItems] = useState([
+    {label: "Men's clothing", value: "men's clothing"},
+    {label: 'jewelery', value: 'jewelery'},
+    {label: 'electronics', value: 'electronics'},
+    {label: "women's clothing", value: "women's clothing"},
+  ]);
+
+  const getProduct = () => {
+    getProducts()
+      .then(res => {
+        setProducts(res?.data);
+      })
+      .catch(err => {
+        console.log({err});
+      });
+  };
+  const onGenderOpen = useCallback(() => {
+    // setCompanyOpen(false);
+  }, []);
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
   return (
     <ScrollView style={[styles.viewStyle]}>
-      <View style={[styles.searchWrapper]}>
-        <Pressable style={[styles.searchField]}>
-          <Ionicons
-            style={[styles.searchIcon]}
-            size={20}
-            color={colors.paleGreen}
-            name="search"
-          />
-          <TextInput placeholder="Search Amazon.in" />
-        </Pressable>
-        <Feather size={24} color={colors.black} name="mic" />
+      <Search />
+      <Location />
+      <Category />
+      <Banner />
+      <SectionTitle title="Trending Deals of the week" />
+      <View style={[styles.trendingImageWrapper]}>
+        {deals.map((item, index) => (
+          <Pressable key={index} style={[styles.trendingImageContainer]}>
+            <Image style={[styles.trendingImage]} source={{uri: item.image}} />
+          </Pressable>
+        ))}
       </View>
-      <View style={[styles.locationWrapper]}>
-        <MaterialIcons size={22} color={colors.black} name="location-pin" />
-        <Pressable>
-          <Text style={[styles.location]}>
-            Deliver to Hitesh - Dombivali 421401
-          </Text>
-        </Pressable>
-        <Feather size={24} color={colors.black} name="chevron-down" />
+      <SectionBreaker />
+      <SectionTitle title="Today's Deals" />
+      <Offers />
+      <SectionBreaker />
+      <View
+        style={{
+          marginHorizontal: 10,
+          marginTop: 20,
+          width: '45%',
+          marginBottom: open ? 50 : 15,
+        }}>
+        <DropDownPicker
+          style={{
+            borderColor: colors.greyLight,
+            height: 30,
+            marginBottom: open ? 120 : 15,
+          }}
+          open={open}
+          value={category}
+          items={items}
+          setOpen={setOpen}
+          setValue={setCategory}
+          setItems={setItems}
+          placeholder={'Choose category'}
+          // placeholderStyle={styles.placeholder}
+          onOpen={onGenderOpen}
+          zIndex={3000}
+          zIndexInverse={1000}
+        />
+      </View>
+      <View
+        style={[
+          style.rowCenter,
+          {
+            flexWrap: 'wrap',
+          },
+        ]}>
+        {products
+          ?.filter(item => item.category === category)
+          .map((item, index) => (
+            <ProductItem item={item} key={index} />
+          ))}
       </View>
     </ScrollView>
   );
@@ -49,29 +127,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  searchWrapper: {
-    backgroundColor: colors.paleGreen,
-    padding: 10,
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+  container: {
+    height: 200,
+  },
+  trendingText: {padding: 10, fontSize: 18, fontWeight: 'bold', marginTop: 10},
+
+  trendingImageWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  trendingImageContainer: {
+    marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  searchField: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 7,
-    gap: 10,
-    backgroundColor: colors.white,
-    borderRadius: 3,
-    height: 38,
-    flex: 1,
-  },
-  locationWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    padding: 10,
-    backgroundColor: colors.pistagreen,
-  },
-  location: {fontSize: 13, fontWeight: '400'},
-  searchIcon: {paddingLeft: 10},
+  trendingImage: {width: 180, height: 180, resizeMode: 'contain'},
 });

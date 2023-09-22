@@ -2,6 +2,7 @@ import axios from 'axios';
 import {credentialType, regiserCredentialType} from '../../screen/type';
 import {URL} from '../constants';
 
+export const fakeApiUrl = 'https://fakestoreapi.com';
 export const registerUser = async (data: regiserCredentialType) => {
   return await axios({
     method: 'POST',
@@ -15,5 +16,12 @@ export const loginUser = async (data: credentialType) => {
     method: 'POST',
     url: `${URL}/login`,
     data: data,
+  });
+};
+
+export const getProducts = async () => {
+  return await axios({
+    method: 'Get',
+    url: `${fakeApiUrl}/products`,
   });
 };
