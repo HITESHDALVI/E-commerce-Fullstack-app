@@ -1,20 +1,33 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import {colors} from '../assets/styles/colors';
 
-const Location = () => {
+type propsType = {
+  handleModal: () => void;
+  name: string;
+  street: string;
+  pincode: string;
+  selectedAddress: string;
+};
+const Location = (props: propsType) => {
+  console.log({props});
+  const {handleModal, name, street, pincode, selectedAddress} = props;
   return (
-    <View style={[styles.locationWrapper]}>
+    <Pressable style={[styles.locationWrapper]} onPress={handleModal}>
       <MaterialIcons size={22} color={colors.black} name="location-pin" />
       <Pressable>
-        <Text style={[styles.location]}>
-          Deliver to Hitesh - Dombivali 421401
-        </Text>
+        {selectedAddress ? (
+          <Text style={[styles.location]}>
+            Deliver to {name} - {street} {pincode}
+          </Text>
+        ) : (
+          <Text style={[styles.location]}>Add a Address</Text>
+        )}
       </Pressable>
       <Feather size={24} color={colors.black} name="chevron-down" />
-    </View>
+    </Pressable>
   );
 };
 

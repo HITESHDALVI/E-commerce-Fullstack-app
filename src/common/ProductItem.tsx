@@ -6,24 +6,26 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {colors} from '../assets/styles/colors';
 import {style} from '../assets/styles/commonStyles';
+import {ProductType} from './product-type';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart} from '../utilis/redux/CartReducer';
 
-type Props = {
-  item: {
-    category: string;
-    description: string;
-    id: number;
-    image: string;
-    price: number;
-    rating: {count: number; rate: number};
-    title: string;
-  };
-};
-
-const ProductItem = (props: Props) => {
+const ProductItem = (props: ProductType) => {
   const {item} = props;
+  const cart = useSelector(state => state.cart.cart);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const dispatch = useDispatch();
+  const additemToCart = (product: ProductType) => {
+    setAddedToCart(true);
+    dispatch(addToCart(product));
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 60000);
+  };
   return (
     <TouchableWithoutFeedback>
       <View style={[styles.container]}>
@@ -35,8 +37,10 @@ const ProductItem = (props: Props) => {
           <Text style={[styles.price]}>₹ {item?.price}</Text>
           <Text style={[styles.ratings]}>{item?.rating?.rate} ratings</Text>
         </View>
-        <Pressable style={[style.rowCenter, styles.addToCart]}>
-          <Text>Add to cart</Text>
+        <Pressable
+          onPress={() => additemToCart(item)}
+          style={[style.rowCenter, styles.addToCart]}>
+          <Text> {addedToCart ? `Added to Cart` : `Add to Cart`}</Text>
         </Pressable>
       </View>
     </TouchableWithoutFeedback>

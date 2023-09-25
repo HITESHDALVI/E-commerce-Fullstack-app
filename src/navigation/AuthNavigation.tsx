@@ -14,6 +14,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../assets/styles/colors';
 import ProductDetail from '../screen/product/ProductDetail';
+import Address from '../screen/address/Address';
+import AddAddressess from '../screen/address/AddAddressess';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -104,6 +106,16 @@ const AuthNavigation = () => {
         <Stack.Screen
           name="product-detail"
           component={ProductDetail}
+          options={headerOptions}
+        />
+        <Stack.Screen
+          name="address"
+          component={AddAddressess}
+          options={headerOptions}
+        />
+        <Stack.Screen
+          name="add-address"
+          component={Address}
           options={headerOptions}
         />
       </Stack.Navigator>

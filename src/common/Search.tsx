@@ -25,7 +25,7 @@ export default Search;
 
 const styles = StyleSheet.create({
   searchWrapper: {
-    backgroundColor: colors.paleGreen,
+    backgroundColor: colors.pistagreen2,
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',

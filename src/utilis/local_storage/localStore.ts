@@ -4,24 +4,19 @@ const setLocalStorage = async (key: string, value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {
-    // saving error
-  }
+  } catch (e) {}
 };
 const getLocalStorage = async (key: string) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // error reading value
-  }
+  } catch (e) {}
 };
 const clearLocalStorage = async (key: string) => {
   try {
     await AsyncStorage.removeItem(key);
     return true;
   } catch (e) {
-    // remove error
     return false;
   }
 };
@@ -30,7 +25,6 @@ const clearAll = async () => {
     await AsyncStorage.clear();
     return true;
   } catch (e) {
-    // remove error
     return false;
   }
 };

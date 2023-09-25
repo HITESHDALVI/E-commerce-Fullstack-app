@@ -1,6 +1,7 @@
 export const colors = {
   textBlue: '#041E42',
   black: '#000000',
+  black1: '#181818',
   lightBlack: '#444444',
   darkGray: '#5B5B5B',
   white: '#FFFFFF',
@@ -18,4 +19,8 @@ export const colors = {
   greyLight: '#B7B7B7',
   red1: '#C60C38',
   gray2: '#E0E0E0',
+  blue1: '#0066b2',
+  pistagreen2: '#00CED1',
+  textColor: '#FBCEB1',
+  offWhite: '#F5F5F5',
 };
