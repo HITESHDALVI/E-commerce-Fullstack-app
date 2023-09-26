@@ -40,3 +40,24 @@ export const getAllAddresses = async (userId: string) => {
     url: `${URL}/addresses/${userId}`,
   });
 };
+
+export const PlaceOrder = async data => {
+  return await axios({
+    method: 'POST',
+    url: `${URL}/orders`,
+    data: data,
+  });
+};
+export const getProfile = async (userId: string) => {
+  return await axios({
+    method: 'GET',
+    url: `${URL}/profile/${userId}`,
+  });
+};
+
+export const getOrders = async (userId: string) => {
+  return await axios({
+    method: 'GET',
+    url: `${URL}/orders/${userId}`,
+  });
+};

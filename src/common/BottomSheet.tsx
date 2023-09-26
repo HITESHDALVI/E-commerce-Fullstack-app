@@ -77,6 +77,7 @@ const BottomSheet = (props: Props) => {
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       {/* <BottomModal
@@ -134,7 +135,7 @@ const BottomSheet = (props: Props) => {
                       </View>
 
                       <CustomText
-                        text={`${item?.houseNo}, ${item?.landmark}`}
+                        text={`${item?.house || ''}  ${item?.landmark}`}
                         numberOfLines={1}
                       />
                       <CustomText text={item?.street} numberOfLines={1} />

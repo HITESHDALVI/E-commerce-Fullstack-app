@@ -16,6 +16,8 @@ import {colors} from '../assets/styles/colors';
 import ProductDetail from '../screen/product/ProductDetail';
 import Address from '../screen/address/Address';
 import AddAddressess from '../screen/address/AddAddressess';
+import ConfirmPayment from '../screen/payment/ConfirmPayment';
+import Order from '../screen/order/Order';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,7 +54,7 @@ const AuthNavigation = () => {
               color: colors.paleGreen,
               fontSize: 14,
             },
-            headerShown: false,
+
             tabBarIcon: ({focused}) =>
               focused ? (
                 <Fontisto size={25} color={colors.paleGreen} name="person" />
@@ -118,6 +120,12 @@ const AuthNavigation = () => {
           component={Address}
           options={headerOptions}
         />
+        <Stack.Screen
+          name="confirm-payment"
+          component={ConfirmPayment}
+          options={headerOptions}
+        />
+        <Stack.Screen name="order" component={Order} options={headerOptions} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -34,7 +34,7 @@ const CustomTextInput = ({label, value, onChangeText, placeholder}) => {
 const initialState: addressType = {
   name: '',
   mobile: '',
-  houseNo: '',
+  house: '',
   street: '',
   landmark: '',
   pincode: '',
@@ -58,14 +58,13 @@ const Address = () => {
     const data = {
       name: address.name,
       mobile: address.mobile,
-      houseNo: address.houseNo,
+      house: address.house,
       street: address.street,
       landmark: address.landmark,
       pincode: address.pincode,
     };
     addAddress(userId, data)
       .then(response => {
-        console.log(response.data);
         setAddress(initialState);
         setTimeout(() => {
           navigation.goBack();
@@ -107,8 +106,8 @@ const Address = () => {
       />
       <CustomTextInput
         label="Flat, House No, Building, Company"
-        value={address.houseNo}
-        onChangeText={(text: string) => updateAddressField('houseNo', text)}
+        value={address.house}
+        onChangeText={(text: string) => updateAddressField('house', text)}
         placeholder="Flat, House No, Building, Company"
       />
       <CustomTextInput

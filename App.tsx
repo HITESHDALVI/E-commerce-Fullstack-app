@@ -1,15 +1,15 @@
 import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AuthNavigation from './src/navigation/AuthNavigation';
 import {Provider} from 'react-redux';
 import {store} from './src/utilis/redux/Store';
 import {UserContext} from './src/utilis/context/UserContext';
+import {colors} from './src/assets/styles/colors';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: colors.pistagreen2,
     flex: 1,
   };
 
@@ -21,7 +21,6 @@ function App(): JSX.Element {
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
             backgroundColor={backgroundStyle.backgroundColor}
           />
-
           <AuthNavigation />
         </SafeAreaView>
       </UserContext>

@@ -33,9 +33,9 @@ const AddAddressess = () => {
 
   useEffect(() => {
     fetchAddresses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fetchAddresses = () => {
-    console.log({userId}, 'id');
     getAllAddresses(userId)
       .then(response => {
         const {addresses} = response.data;
@@ -46,12 +46,13 @@ const AddAddressess = () => {
       });
   };
 
+  // console.log({addresses});
   useFocusEffect(
     useCallback(() => {
       fetchAddresses();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
-  console.log('addresses', addresses);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -81,12 +82,12 @@ const AddAddressess = () => {
 
               <AddressDetail
                 label="Address"
-                value={`${item?.houseNo}, ${item?.landmark}`}
+                value={`${item?.house || '-'}, ${item?.landmark || '-'}`}
               />
-              <AddressDetail label="Street" value={item?.street} />
+              <AddressDetail label="Street" value={item?.street || '-'} />
               <AddressDetail label="Location" value="India, Bangalore" />
-              <AddressDetail label="Phone No" value={item?.mobile} />
-              <AddressDetail label="Pin Code" value={item?.pincode} />
+              <AddressDetail label="Phone No" value={item?.mobile || '-'} />
+              <AddressDetail label="Pin Code" value={item?.pincode || '-'} />
 
               <View style={[styles.actionWrapper]}>
                 <Pressable style={[styles.action]}>

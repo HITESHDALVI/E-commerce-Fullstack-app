@@ -12,7 +12,6 @@ type propsType = {
   selectedAddress: string;
 };
 const Location = (props: propsType) => {
-  console.log({props});
   const {handleModal, name, street, pincode, selectedAddress} = props;
   return (
     <Pressable style={[styles.locationWrapper]} onPress={handleModal}>

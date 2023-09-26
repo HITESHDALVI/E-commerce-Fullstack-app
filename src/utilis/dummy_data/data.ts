@@ -179,3 +179,10 @@ export const offers = [
     size: '8GB RAM, 128GB Storage',
   },
 ];
+
+export const steps = [
+  {title: 'Address', content: 'Address Form'},
+  {title: 'Delivery', content: 'Delivery Options'},
+  {title: 'Payment', content: 'Payment Details'},
+  {title: 'Place Order', content: 'Order Summary'},
+];

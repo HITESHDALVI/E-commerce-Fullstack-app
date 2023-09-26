@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   dealsTopBorder: {
     height: 1,
     borderColor: colors.grey,
-    borderWidth: 2,
+    borderWidth: 0.5,
     marginTop: 15,
   },
 });

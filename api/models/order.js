@@ -21,7 +21,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
       },
       image: {
-        type: Number,
+        type: String,
         required: true,
       },
     },
@@ -42,8 +42,8 @@ const orderSchema = new mongoose.Schema({
     house: {type: String, required: true},
     street: {type: String, required: true},
     landmark: {type: String, required: true},
-    city: {type: String, required: true},
-    country: {type: String, required: true},
+    city: {type: String, required: false},
+    country: {type: String, required: false},
     pincode: {type: String, required: true},
   },
   paymentMethod: {
